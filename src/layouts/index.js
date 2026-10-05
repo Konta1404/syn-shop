@@ -17,17 +17,17 @@ const Layout = ({ children, site }) => (
                 {site.siteMetadata.siteName}
               </Link>
             </h1>
-            <div className="Header__summary snipcart-summary snipcart-checkout">
-              <div className="Header__summary__title">
-                🛍 MY CART 🛍
-              </div>
-              <div className="Header__summary__line">
+            <button type="button" aria-label="Open shopping cart" className="Header__summary snipcart-summary snipcart-checkout">
+              <span className="Header__summary__title">
+                MY CART
+              </span>
+              <span className="Header__summary__line">
                 Number of items: <span className="snipcart-total-items"></span>
-              </div>
-              <div className="Header__summary__line">
+              </span>
+              <span className="Header__summary__line">
                 Total price: <span className="snipcart-total-price"></span>
-              </div>
-            </div>
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@ const Layout = ({ children, site }) => (
 )
 
 Layout.propTypes = {
-  children: PropTypes.func,
+  children: PropTypes.node,
 }
 
 export default Layout

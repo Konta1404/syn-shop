@@ -1,49 +1,21 @@
-# Snipcart + Gatsby + DatoCMS example
+# Syn Shop
 
-This is a demo project to get you started with a static ecommerce site powered by [Gatsby](https://www.gatsbyjs.org/), [Snipcart](https://snipcart.com/) and [DatoCMS](https://www.datocms.com/).
+An example storefront integrating Gatsby, DatoCMS product content, and Snipcart checkout. This is an integration demo, not a custom commerce backend or evidence of real customers or transactions. The original example README and attribution are preserved in `docs/original-README.md`.
 
-It's a brutalist socks ecommerce site, that looks like this:
+## Architecture
 
-![Socks ecommerce screenshot](./preview.png)
+The Gatsby home-page GraphQL query reads products from DatoCMS at build time. Product markup supplies item data to Snipcart, which manages checkout. `src/layouts/index.js` supplies the shared page shell and cart entry point. There is no custom order-processing backend in this repository.
 
-You can see how it looks live on this [demo installation](https://datocms-snipcart-gatsby-demo.netlify.com/).
+## Setup prerequisites
 
-All the details on how this works on the [related blog post](https://www.datocms.com/blog/static-ecommerce-website-snipcart-gatsbyjs-datocms).
+The historical dependency set uses Gatsby 2 and node-sass 4. Use a compatible isolated legacy runtime, or upgrade those dependencies before regular use. A DatoCMS project must expose Product records with `id`, `name`, `price`, and an image field compatible with the Gatsby query. The config reads `DATO_API_TOKEN` from a local `.env`.
 
-## Deploy on DatoCMS
+Use only a Snipcart test-mode public key for a portfolio demo. Set `SNIPCART_PUBLIC_KEY` in `.env`; the previously hardcoded key has been removed from the working source. Its validity and mode were not verified. Do not perform checkout transactions while evaluating this repository.
 
-If you want to set up a live demo for yourself, just [sign up for a free DatoCMS account](https://dashboard.datocms.com/signup) and click this button:
+The package scripts are `npm run develop` and `npm run build`. They were not run in this workspace; no CMS or checkout service was contacted. The existing `npm test` script is a placeholder, not a passing test suite.
 
-[![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/snipcart-gatsby-demo)
+Native purchase/cart buttons and missing-image/catalog guards have been added. JSX syntax was checked locally, but the CMS-dependent application was not built.
 
-## Usage
+## Improvements before a showcase
 
-To run this project locally, install the dependencies of this project:
-
-```
-npm install
-```
-
-Add an `.env` file containing the read-only API token of your DatoCMS site (set up with the demo button above):
-
-```
-echo 'DATO_API_TOKEN=abc123' >> .env
-```
-
-Then, to run this website in development mode (with live-reload):
-
-```
-npm run develop
-```
-
-To build the final, production ready static website:
-
-```
-npm run build
-```
-
-The final result will be saved in the `public` directory.
-
-## Further demo options
-
-This project is also available as a demo on [Gatsby Cloud](https://www.gatsbyjs.com/). This will allow you to test the [Gatsby preview](https://www.datocms.com/blog/live-preview-changes-on-gatsby-preview) capabilities in no time.
+Document your modifications relative to the original example, upgrade the build stack, add fixture-backed catalog builds, test missing product/image data plus sandbox checkout handoff. A full rebuild is lower priority than a modern React flagship.
